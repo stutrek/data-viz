@@ -1,0 +1,68 @@
+.container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #eee;
+}
+
+.container > * {
+	background-color: white;
+}
+
+.data {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100px;
+	overflow-y: auto;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table thead {
+	font-weight: bold;
+}
+
+thead td {
+	border: none;
+	border-bottom: 1px solid grey;
+}
+
+td {
+	font-family: sans-serif;
+	text-align: right;
+	min-width: 50px;
+	border: 1px solid silver;
+	margin: 0;
+}
+
+.graph-builder {
+	position: absolute;
+	top: 110px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: grid;
+	grid-template-columns: 50px 1fr;
+	grid-template-rows: auto 200px;
+}
+
+.shape-adder {
+	grid-column: 1;
+	grid-row: 1 / 3;
+}
+
+.graph {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.shape-editor {
+	grid-column: 2;
+	grid-row: 2;
+}

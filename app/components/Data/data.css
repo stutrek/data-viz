@@ -1,0 +1,8 @@
+.container {
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.title {
+	font-weight: bold;
+}
