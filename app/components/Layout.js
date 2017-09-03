@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Data from './Data';
+import DataSetContainer from './Data';
 import ShapeAdder from './Shapes/Adder';
 import ShapeEditor from './Shapes/Editor';
 import Graph from './Graph';
@@ -15,7 +15,7 @@ class Layout extends React.Component {
 	render () {
 		return (<div className={styles.container}>
 			<div className={styles.data}>
-				<Data data={this.props.data} />
+				<DataSetContainer data={this.props.data} />
 			</div>
 			<div className={styles.graphBuilder}>
 				<ShapeAdder

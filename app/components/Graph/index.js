@@ -4,6 +4,8 @@ import * as types from '../Shapes/types';
 
 import styles from './graph.css';
 
+const pixelRatio = window.devicePixelRatio || 0;
+
 export default class Graph extends React.PureComponent {
 
 	componentDidUpdate () {
@@ -54,10 +56,9 @@ export default class Graph extends React.PureComponent {
 				diameter = (sizeRange * pointDiameter) + shape.minSize;
 			}
 
-			const radius = diameter / 2;
+			const radius = (diameter / 2) * pixelRatio;
 			const x = point[0];
 			const y = point[1];
-			console.log('drawing', shape.color, x, y, radius);
 
 			context.beginPath();
 			context.arc(x, height - y, radius, 0, 2 * Math.PI, false);
@@ -68,8 +69,8 @@ export default class Graph extends React.PureComponent {
 	}
 
 	renderGraph () {
-		const width = this.el.width = this.el.offsetWidth;
-		const height = this.el.height = this.el.offsetHeight;
+		const width = this.el.width = this.el.offsetWidth * pixelRatio;
+		const height = this.el.height = this.el.offsetHeight * pixelRatio;
 		const context = this.el.getContext('2d');
 
 		this.props.shapes.map(shape => {
