@@ -43,7 +43,7 @@ export class Rectangle extends Record({
 	x: StringOrNumber,
 	y: StringOrNumber,
 	width: StringOrNumber,
-	Height: StringOrNumber,
+	height: StringOrNumber,
 	minWidth: Number,
 	maxWidth: Number,
 	minHeight: Number,

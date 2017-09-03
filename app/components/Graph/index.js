@@ -68,6 +68,32 @@ export default class Graph extends React.PureComponent {
 		});
 	}
 
+	renderRectangle (context, canvasWidth, canvasHeight, shape) {
+		const values = this.getPoints(canvasWidth, canvasHeight, shape);
+		const data = this.props.data.find(s => s.title === shape.dataSet);
+		values.forEach((point, i) => {
+			var width;
+			if (typeof shape.width === 'number') {
+				width = shape.width * pixelRatio;
+			} else {
+				var sizeRange = shape.maxWidth - shape.minWidth;
+				var fieldIndex = data.fields.indexOf(shape.width);
+				var pointWidth = data.scales[shape.width](data.rows[i][fieldIndex]);
+				width = ((sizeRange * pointWidth) + shape.minWidth) * pixelRatio;
+			}
+
+			const radius = (width / 2);
+			const x = point[0] - radius;
+			const y = point[1] + radius;
+
+			context.beginPath();
+			context.rect(x, canvasHeight - y, width, width);
+			context.fillStyle = shape.color;
+			context.fill();
+
+		});
+	}
+
 	renderGraph () {
 		const width = this.el.width = this.el.offsetWidth * pixelRatio;
 		const height = this.el.height = this.el.offsetHeight * pixelRatio;
@@ -81,6 +107,10 @@ export default class Graph extends React.PureComponent {
 
 				case shape instanceof types.Circle:
 					this.renderCircle(context, width, height, shape);
+					break;
+
+				case shape instanceof types.Rectangle:
+					this.renderRectangle(context, width, height, shape);
 			}
 		});
 	}

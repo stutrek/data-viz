@@ -24,6 +24,19 @@ export default class Adder extends React.PureComponent {
 		this.props.shapeActions.addShape(circle);
 	}
 
+	addSquare = () => {
+		const square = new types.Rectangle({
+			width: 15,
+			height: 15,
+			minWidth: 5,
+			maxWidth: 30,
+			minHeight: 5,
+			maxHeight: 30,
+			color: '#000000'
+		}).reset(this.props.data[0]);
+		this.props.shapeActions.addShape(square);
+	}
+
 	render () {
 		return (<div className={styles.shapeAdder + ' ' + this.props.className}>
 			<button onClick={this.addLine}>Line</button>
