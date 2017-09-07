@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import filedrop from '../middleware/filedrop'
 import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
@@ -14,6 +15,7 @@ const configureStore = () => {
 
   // Thunk Middleware
   middleware.push(thunk);
+  middleware.push(filedrop());
 
   // Logging Middleware
   const logger = createLogger({
@@ -26,12 +28,11 @@ const configureStore = () => {
   const router = routerMiddleware(history);
   middleware.push(router);
 
-  // Apply Middleware & Compose Enhancers
-  enhancers.push(applyMiddleware(...middleware));
-
   // Create Store
-  const store = createStore(rootReducer);
+  const store = createStore(rootReducer, {}, applyMiddleware(...middleware));
   return store;
 };
 
 export default { configureStore, history };
+
+console.log('dev');
