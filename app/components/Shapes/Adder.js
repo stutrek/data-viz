@@ -1,50 +1,30 @@
 import React from 'react';
 
-import * as types from './types';
+import shapes from '../Shapes';
 
 import styles from '../styles/layout.css';
 
 export default class Adder extends React.PureComponent {
 
-	addLine = () => {
-		const line = new types.Line({
-			thickness: 2,
-			color: '#000000'
-		}).reset(this.props.data[0]);
-		this.props.shapeActions.addShape(line);
+	add = (type) => {
+		this.props.shapeActions.addShape(new shapes[type].Model({
+			dataSet: this.props.data[0].title,
+			color: '#000000',
+			x: this.props.data[0].fields[0],
+			y: this.props.data[0].fields[0],
+			z: this.props.data[0].fields[0],
+		}));
 	}
-
-	addCircle = () => {
-		const circle = new types.Circle({
-			diameter: 15,
-			minSize: 5,
-			maxSize: 30,
-			color: '#000000'
-		}).reset(this.props.data[0]);
-		this.props.shapeActions.addShape(circle);
-	}
-
-	addSquare = () => {
-		const square = new types.Rectangle({
-			width: 15,
-			height: 15,
-			minWidth: 5,
-			maxWidth: 30,
-			minHeight: 5,
-			maxHeight: 30,
-			color: '#000000'
-		}).reset(this.props.data[0]);
-		this.props.shapeActions.addShape(square);
-	}
-
 	render () {
 		return (<div className={styles.shapeAdder + ' ' + this.props.className}>
-			<button onClick={this.addLine}>Line</button>
-			<button onClick={this.addSquare}>Square</button>
-			<button onClick={this.addCircle}>Circle</button>
-			<button onClick={this.addTriangle}>Triangle</button>
-			<button onClick={this.addStar}>Star</button>
-			<button onClick={this.addText}>Text</button>
+			{Object.values(shapes).map(type => {
+				return (<button
+					key={type.type}
+					onClick={() => this.add(type.type)}
+				>
+					<type.Icon />
+				</button>);
+			})}
 		</div>);
 	}
 }

@@ -7,34 +7,7 @@ export const Color = Record({
 	a: 1
 });
 
-const StringOrNumber = Maybe(Union(String, Number));
-
-export class Circle extends Record({
-	id: Maybe(String),
-	type: 'Circle',
-	dataSet: Maybe(String),
-	x: StringOrNumber,
-	y: StringOrNumber,
-	diameter: StringOrNumber,
-	minSize: Number,
-	maxSize: Number,
-	color: Any
-}) {
-	reset (dataSet) {
-		let shape = this;
-		shape = shape.set('dataSet', dataSet.title);
-		if (typeof this.x !== 'number') {
-			shape = shape.set('x', dataSet.fields[0]);
-		}
-		if (typeof this.y !== 'number') {
-			shape = shape.set('y', dataSet.fields[0]);
-		}
-		if (typeof this.diameter !== 'number') {
-			shape = shape.set('diameter', dataSet.fields[0]);
-		}
-		return shape;
-	}
-}
+export const StringOrNumber = Maybe(Union(String, Number));
 
 export class Rectangle extends Record({
 	id: Maybe(String),
@@ -64,31 +37,6 @@ export class Rectangle extends Record({
 		}
 		if (typeof this.width !== 'number') {
 			shape = shape.set('width', dataSet.fields[0]);
-		}
-		return shape;
-	}
-}
-
-export class Line extends Record({
-	id: Maybe(String),
-	type: 'Line',
-	dataSet: Maybe(String),
-	x: StringOrNumber,
-	y: StringOrNumber,
-	thickness: StringOrNumber,
-	color: Any
-}) {
-	reset (dataSet) {
-		let shape = this;
-		shape = shape.set('dataSet', dataSet.title);
-		if (typeof this.x !== 'number') {
-			shape = shape.set('x', dataSet.fields[0]);
-		}
-		if (typeof this.y !== 'number') {
-			shape = shape.set('y', dataSet.fields[0]);
-		}
-		if (typeof this.thickness !== 'number') {
-			shape = shape.set('thickness', dataSet.fields[0]);
 		}
 		return shape;
 	}
